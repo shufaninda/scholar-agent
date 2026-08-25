@@ -1,21 +1,16 @@
 """意图分类器：三路并行（分类 + 重写 + 论文字段抽取）。
 
-对应 Sea 的 IntentClassifier（classifier.go）。
-对应 DESIGN.md 1 节"意图识别"+ 1.1 节"论文字段抽取"。
-
-⭐ 这是重点一的核心——面试白板默写题。
-
-三路并行设计（对应 Sea 的 errgroup.WithContext）：
+三路并行设计：
     路 A：ClassifyOnly         → LLM 返回 intent_type + entities + confidence
     路 B：Rewrite              → LLM 把用户 query 重写为专业表述
     路 C：ExtractPaperFields   → LLM 提取 paper_title / arxiv_id / method_name
 
-降级语义（⭐ 面试必考）：
+降级语义：
     - classify 失败 → 致命，整体返回 error
     - rewrite 失败  → 非致命，降级用原 query
     - extract 失败  → 非致命，降级用空 dict
 
-用 asyncio.gather(return_exceptions=True) 替代 Go 的 errgroup：
+用 asyncio.gather(return_exceptions=True) 并行编排三路：
     - return_exceptions=True 让异常不抛出，而是作为结果返回
     - 调用方用 isinstance(result, Exception) 判断是否失败
     - 这样三路互不影响，可以独立降级
@@ -88,7 +83,7 @@ class IntentClassifier:
         memory_turns = await self.memory.load_recent_turns(session_id)
 
         # ─── 第 3 步：三路并行调 LLM ───
-        # ⭐ 三路并行 + 独立降级（面试白板默写题）
+        # ⭐ 三路并行 + 独立降级
         classify_r, rewrite_r, extract_r = await asyncio.gather(
             self._classify_only(raw_query, memory_turns),
             self._rewrite(raw_query, memory_turns),

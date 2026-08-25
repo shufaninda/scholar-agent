@@ -1,8 +1,5 @@
 """依赖恢复提示词：LLM 修复 pip install 失败。
 
-对应 Sea 的 DependencyRecoverySystemPrompt。
-对应 DESIGN.md 2.1 节"依赖恢复机制"。
-
 依赖恢复两层恢复的第二层（LLM 修复）：
     第一层：规则兜底（opencv → opencv-python-headless 等包名纠正）
     第二层：LLM 修复（处理复杂情况，用这个提示词）

@@ -1,8 +1,5 @@
 """Redis 短期记忆：LPUSH/LTRIM 滑动窗口保留最近 N 轮对话。
 
-对应 Sea 的 IntentMemoryStore（memory_redis.go）。
-对应 DESIGN.md 1 节"Redis 记忆"。
-
 为什么需要：
     意图识别不能只看当前这一句——用户可能说"那换个框架对比"，
     如果不知道上一句是"复现 Attention 论文"，就无法理解"换个框架"指什么。
@@ -31,8 +28,6 @@ from redis.asyncio import Redis
 
 class IntentMemoryStore:
     """Redis 短期记忆：加载最近 N 轮对话补充上下文。
-
-    对应 Sea 的 IntentMemoryStore（memory_redis.go）。
 
     用法：
         store = IntentMemoryStore(redis)

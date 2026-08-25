@@ -1,15 +1,11 @@
 """意图识别提示词：分类 + 重写 + 论文字段抽取。
 
-对应 Sea 的 IntentClassificationSystemPrompt + IntentRewriteSystemPrompt + PaperSearchSystemPrompt。
-对应 DESIGN.md 1 节"意图识别"+ 1.1 节"论文字段抽取"。
-
 三路并行各用一个 system prompt：
     路 A：CLASSIFY_SYSTEM   → 意图分类（4 种意图 + 实体提取 + Few-Shot）
     路 B：REWRITE_SYSTEM     → query 重写（口语 → 专业表述）
     路 C：EXTRACT_SYSTEM     → 论文字段抽取（paper_title / arxiv_id / method_name）
 
-复刻自 Sea 的 prompts.go 431-625 行，砍掉了 General 意图（我们的 route_after_intent
-对 unknown 直接 END，不需要 General 分支）。
+已砍掉 General 意图：route_after_intent 对 unknown 直接 END，不需要 General 分支。
 """
 
 # ──────────────────────────────────────────────

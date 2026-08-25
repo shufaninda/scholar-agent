@@ -1,8 +1,5 @@
 """机制4：CircuitBreaker 防死循环。
 
-对应 DESIGN.md 2.4 节"机制 4"。
-对应 Sea 的 docker-core/watchdog/circuit_breaker.go。
-
 为什么需要：
     LLM 修复代码时可能"鬼打墙"——多次重试都尝试同一个错误方案（生成同样的
     cmd+output）。CircuitBreaker 对 cmd+output 做 SHA256，滑动窗口内全相同

@@ -1,8 +1,5 @@
 """机制2：SHA256 + Repository Fingerprint（防代码偷换）。
 
-对应 DESIGN.md 2.4 节"机制 2"。
-对应 Sea 的 AdapterCodeSHA256 + benchmarkRepositoryFingerprint。
-
 为什么需要：
     1. 防"修复后代码没变"：LLM 可能返回原代码，靠 SHA256 检测
     2. 防"执行期间偷改源码"：LLM 可能在 run.py 里偷偷改其他文件

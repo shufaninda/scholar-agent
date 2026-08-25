@@ -1,8 +1,5 @@
 """Docker 沙箱执行器：四层隔离 + 两阶段网络 + 持久化容器复用。
 
-对应 Sea 的 internal/sandbox/opensandbox.go。
-对应 DESIGN.md 2.2 节（安全加固）+ 2.2.2 节（持久化沙箱）。
-
 四层隔离：
     1. 文件系统：只挂载授权过的 workspace（authorize_mount_path）
     2. 网络：运行阶段 network_mode="none" 断网

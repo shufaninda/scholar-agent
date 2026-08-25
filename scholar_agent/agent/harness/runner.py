@@ -1,12 +1,8 @@
 """Harness 自愈引擎：3 次重试 + 5 个边界约束。
 
-对应 DESIGN.md 2.4 节"整合到 Harness 完整流程"。
-对应 Sea 的 benchmark_harness.go + paper_debug_harness.go。
-
 ⭐ 这是项目灵魂——"模型负责建议，代码负责约束"。
-⭐ 面试白板默写题：必须能默写 run_with_healing 主循环骨架。
 
-主循环骨架（面试默写版）：
+主循环骨架：
 
     for attempt in 1..3:
         if attempt > 1 and 代码 SHA256 没变: continue

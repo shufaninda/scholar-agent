@@ -1,15 +1,9 @@
 """沙箱安全加固：镜像白名单 + 挂载路径授权 + cap-drop + no-new-privileges。
 
-对应 DESIGN.md 2.2.1 节"沙箱安全加固"。
-对应 Sea 的 docker-sandbox/internal/engine/docker_security.go。
-
 为什么需要：
-    原 DockerSandbox 只设了 user="nobody" + network_mode="none"，缺 Sea 的
+    原 DockerSandbox 只设了 user="nobody" + network_mode="none"，缺少
     关键安全层。挂载路径不校验会路径逃逸，没 cap-drop 仍能调用危险系统调用，
     没镜像白名单可能拉恶意镜像。
-
-【你来手敲】authorize_mount_path（防路径逃逸，面试会问）
-【AI 生成】validate_image + secure_docker_kwargs（你审）
 
 关键修复（P1-7）：
     字符串 startswith 前缀匹配可被 /tmpevil 绕过，必须用 Path.parents 比较。
@@ -41,7 +35,6 @@ def authorize_mount_path(path: str) -> str:
     """挂载路径授权：Abs + EvalSymlinks + 必须落在 WORKSPACE_ROOTS 下。
 
     防 LLM 通过 task.inputs["workspace"] 传入 "/etc" 或 "../../etc" 之类逃逸路径。
-    对应 Sea 的 normalizeAndAuthorizeMountPath。
 
     ⚠️ 关键修复（P1-7）：不能用 str.startswith，会被 /tmpevil 绕过。
        必须用 Path.parents 比较：abs_path == root 或 root in abs_path.parents。

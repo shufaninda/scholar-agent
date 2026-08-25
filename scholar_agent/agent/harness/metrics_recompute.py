@@ -1,14 +1,11 @@
-"""机制3：指标重算防伪（⭐ Sea Harness 灵魂）。
-
-对应 DESIGN.md 2.4 节"机制 3"。
-对应 Sea 的 benchmark_harness.go 从 predictions.jsonl 重算指标。
+"""机制3：指标重算防伪（⭐ Harness 灵魂）。
 
 为什么需要：
     LLM 跑完 benchmark 后可能直接写一个 {"accuracy": 0.99} 到 metrics.json 谎报成功。
     本模块从 predictions.jsonl 逐样本重算指标，和 LLM 上报的不一致就判失败。
     这是 Harness 区别于"普通代码执行器"的核心。
 
-实现说明：DESIGN 建议 sklearn，但为避免引入 40MB 依赖，这里用纯 Python
+实现说明：为避免引入 sklearn 等重型依赖，这里用纯 Python
 实现 accuracy / macro_f1 / mse / mae（数学定义一致，可交叉验证）。
 """
 

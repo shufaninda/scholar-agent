@@ -1,6 +1,6 @@
 """LangGraph StateGraph 构建：Plan-Execute 多 Agent 主流程（步骤自环版）。
 
-这是整个项目的编排核心——用 LangGraph 替代 Sea 的自写调度器。
+这是整个项目的编排核心——基于 LangGraph 的调度编排。
 
 主图（静态，编译期固定 5 个节点）：
 

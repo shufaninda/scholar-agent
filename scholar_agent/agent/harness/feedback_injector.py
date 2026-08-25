@@ -1,8 +1,5 @@
 """机制5：FeedbackInjector 负反馈注入。
 
-对应 DESIGN.md 2.4 节"机制 5"。
-对应 Sea 的 docker-core/checkpoint/feedback_injector.go。
-
 为什么需要：
     LLM 修复失败后，下一次重试时如果不告诉它"上次你试过 X 方案失败了"，
     它可能再次尝试同样的方案。FeedbackInjector 把失败记录拼成 system prompt

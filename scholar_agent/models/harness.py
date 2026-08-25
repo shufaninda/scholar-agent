@@ -1,11 +1,8 @@
 """Harness 数据模型：自愈执行报告 + 每次尝试记录。
 
-对应 DESIGN.md 2.4 节"整合到 Harness 完整流程"用到的模型。
-对应 Sea 的 BenchmarkHarnessReport + BenchmarkAttempt。
-
 为什么需要：
     Harness 跑完后要返回结构化报告——记录每次 attempt 的退出码/错误/是否修复过，
-    以及最终状态（passed/failed）和原因。前端展示 + 调试 + 面试讲法都依赖这个。
+    以及最终状态（passed/failed）和原因。前端展示 + 调试都依赖这个。
 
 字段一致性说明（解决 P1-14）：
     code_hash 必须有默认值 None，因为首次 attempt 不需要 hash（只有 attempt > 1

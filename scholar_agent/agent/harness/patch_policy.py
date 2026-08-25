@@ -1,8 +1,5 @@
 """机制1：Patch Policy 静态校验（防 LLM 越权）。
 
-对应 DESIGN.md 2.4 节"机制 1"。
-对应 Sea 的 paper_debug_harness.go patch policy 静态拒绝。
-
 为什么需要：
     LLM 修复代码时可能"偷懒"——补丁里加 subprocess.run("pip install xxx")
     绕过依赖恢复、加 mock_metric = 0.99 伪造指标、加 requests.get 突破断网。

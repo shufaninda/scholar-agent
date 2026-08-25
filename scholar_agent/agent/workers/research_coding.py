@@ -1,9 +1,6 @@
 """ResearchCodingAgent：论文仓库发现 + 执行 + Harness 自愈。
 
-对应 Sea 的 internal/agent/research_coding.go。⭐核心
-对应 DESIGN.md 5 节。
-
-⭐ Sea 的关键设计哲学：repo_discovery / repo_prepare 绕过 LLM 走确定性
+⭐ 关键设计：repo_discovery / repo_prepare 绕过 LLM 走确定性
 后端逻辑——LLM 会编造 URL 或选错文件，破坏可重复性。只有 Harness 修复
 代码阶段才调 LLM。
 

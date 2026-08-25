@@ -3,7 +3,7 @@
 设计哲学：模型负责建议，代码负责约束。
 所有 LLM 产出都要被代码层校验——防造假、防越权、防死循环、防重复犯错。
 
-5 个边界机制（对应 DESIGN.md 2.4 节）：
+5 个边界机制：
     1. patch_policy:        补丁静态校验（防 LLM 越权）
     2. fingerprint:         SHA256 + Repository Fingerprint（防代码偷换）
     3. metrics_recompute:   指标重算防伪（防 LLM 造假，⭐ Harness 灵魂）

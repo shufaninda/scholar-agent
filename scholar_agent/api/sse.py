@@ -1,8 +1,5 @@
 """SSE 流式推送：EventBus 按 plan_id 分发事件给前端。
 
-对应 Sea 的 SSE 实现。
-对应 DESIGN.md 2.2 节"流式执行 + SSE 推送"。
-
 用法：
     bus = EventBus()
     queue = bus.subscribe(plan_id)          # 前端连上 SSE 端点

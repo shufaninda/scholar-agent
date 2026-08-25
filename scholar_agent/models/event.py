@@ -1,13 +1,8 @@
 """PlanEvent 模型：SSE 推送给前端的事件。
 
-对应 Sea 的 PlanEvent struct（event.go）。
-对应 DESIGN.md 2.2 节"流式执行 + SSE 推送"。
-
 为什么需要：
     前端通过 SSE 实时展示任务进度 + 沙箱输出。每个事件对应一个 SSE 消息。
     事件经 event_sink 回调直推 SSE（旁路），不进 AgentState。
-
-【AI 生成】类骨架（你审字段一致性）
 """
 
 from datetime import datetime, timezone
@@ -20,7 +15,6 @@ from pydantic import BaseModel, Field
 class PlanEventType(str, Enum):
     """事件类型枚举。
 
-    对应 Sea 的 PlanEventType 常量。
     前端按 type 决定怎么渲染（如 sandbox_output 追加到控制台，task_completed 标绿）。
     """
 

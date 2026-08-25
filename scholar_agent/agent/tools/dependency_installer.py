@@ -1,6 +1,5 @@
 """依赖安装工具：pip install + 两层恢复（规则兜底 + LLM 修复）。
 
-对应 DESIGN.md 2.1 节"依赖恢复机制"。
 被 CoderAgent 和 ResearchCodingAgent 调用。
 
 两层恢复：

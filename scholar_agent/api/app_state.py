@@ -1,7 +1,5 @@
 """应用状态组装：把 graph / services / bus / store 挂到一个对象上，供路由依赖注入。
 
-对应 Sea 的依赖注入容器（wire 生成的 ProviderSet）。
-
 为什么集中组装：
     1. lifespan 里建一次，所有路由共享（单例）
     2. 测试不用起真 LLM/Docker——override 依赖函数返回 Fake AppState 即可
@@ -9,7 +7,7 @@
 
 ⭐ 审批重构后的状态管理（只剩一套）：plan 的生命周期状态全部住在
 LangGraph checkpoint 里（thread_id = plan_id），本项目不再持有
-PlanRegistry——Sea 时代"内存 dict 存计划 + 两段式 REST"的组合已删。
+PlanRegistry——"内存 dict 存计划 + 两段式 REST"的旧组合已删。
 GET /plans/{id}、/resume、/cancel 都从 aget_state 读权威状态。
 """
 

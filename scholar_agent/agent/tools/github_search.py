@@ -1,9 +1,8 @@
 """GitHub 搜索工具：用 PyGithub 搜论文的复现 repo。
 
-对应 DESIGN.md 2.3 节 ResearchCodingAgent 的 repo_discovery 阶段。
 纯 API 调用，不调 LLM——LLM 在意图识别阶段已抽取搜索关键词（PaperSearchFields）。
 
-质量过滤（对齐 Sea）：
+质量过滤：
     - stargazers_count > 10（过滤玩具 repo）
     - 最近一年内有 push（过滤弃坑 repo）
 """

@@ -1,6 +1,5 @@
 """FastAPI 应用入口：路由注册 + 中间件 + 生命周期。
 
-对应 Sea 的 cmd/server/main.go。
 lifespan 职责：启动时组装 AppState（LLM/沙箱/Redis 都是惰性连接，
 导入和启动不会因缺 Docker/Redis 而失败，真正用到时才连）。
 """

@@ -1,14 +1,9 @@
 """Artifact 模型：Agent 之间传递的产物。
 
-对应 Sea 的 Artifact struct（artifact.go）。
-对应 DESIGN.md 0 节 State 定义里的 artifacts: dict[str, Artifact]。
-
 为什么需要：
     Agent 间产物流转的核心载体。LibrarianAgent 产出 parsed_paper，
     CoderAgent 消费 parsed_paper 产出 generated_code，DataAgent 消费所有 artifact
     产出 final_report。Plan.artifacts 是全局容器，每个 Agent 完成后写入。
-
-【AI 生成】类骨架（你审字段一致性）
 """
 
 from datetime import datetime, timezone
@@ -21,7 +16,6 @@ from pydantic import BaseModel, Field
 class ArtifactType(str, Enum):
     """Artifact 类型枚举。
 
-    对应 Sea 的 inferArtifactType 关键词推断。
     executor 根据 artifact 内容关键词推断类型，存入 type 字段。
     下游消费方可以按类型决定怎么处理（如 image_base64 转图片展示）。
     """

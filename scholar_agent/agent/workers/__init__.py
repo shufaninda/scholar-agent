@@ -1,6 +1,5 @@
 """Agent 层：Librarian / Coder / ResearchCoding / Data。
 
-对应 Sea 的 internal/agent/。
 workers 是"执行层"（4 个 Agent 干活），harness 是"约束层"（校验 LLM 产出）。
 execute_step 按 Step.agent 路由到这里的 Agent。
 

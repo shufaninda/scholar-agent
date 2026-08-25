@@ -1,13 +1,8 @@
 """Harness 代码修复提示词。
 
-对应 Sea 的 RuntimeCodeRepairUserPrompt。
-对应 DESIGN.md 2.4 节"机制 5：FeedbackInjector"。
-
 Harness 的 _repair_code 用这个提示词调 LLM 修复代码：
     传入：原代码 + traceback（+ 历史失败负反馈）
     输出：修复后的完整代码
-
-复刻自 Sea 的 prompts.go 395-428 行。
 """
 
 # ──────────────────────────────────────────────

@@ -1,6 +1,5 @@
 """API 路由：/runs、/resume、/stream、/cancel。
 
-对应 Sea 的 internal/api/routes.go。
 完整端点一览：
 - POST /runs                      一段式：起全流程图（意图→规划→审批→执行→报告）
 - POST /plans/{plan_id}/resume    审批决定（approve/revise/abandon），唤醒挂起的图

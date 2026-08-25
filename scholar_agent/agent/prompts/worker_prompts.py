@@ -1,14 +1,11 @@
 """4 个业务 Agent 的提示词。
 
-对应 Sea 的 LibrarianSystemPrompt + CoderSystemPrompt + DataSystemPrompt。
-对应 DESIGN.md 5 节"4 个 Agent"。
-
 3 个需要提示词的 Agent（ResearchCodingAgent 是确定性操作不需要 LLM）：
     1. LibrarianAgent: 论文解析（提取方法/架构/复现难点）
     2. CoderAgent: 代码生成（沙箱执行环境说明 + Python 3.12 兼容）
     3. DataAgent: 报告生成（结构化 Markdown 报告）
 
-复刻自 Sea 的 prompts.go 158-355 行，砍掉了 Python 3.9 兼容（我们用 3.12）。
+已砍掉 Python 3.9 兼容（本项目使用 3.12）。
 """
 
 # ──────────────────────────────────────────────

@@ -1,8 +1,4 @@
-"""意图上下文模型：对应 Sea 的 IntentContext struct。
-
-对应 DESIGN.md 1 节"意图识别"+ 1.1 节"论文字段抽取"。
-
-【AI 生成】类骨架 + Field 描述（你审字段一致性）
+"""意图上下文模型。
 """
 
 from enum import Enum
@@ -14,7 +10,6 @@ from pydantic import BaseModel, Field
 class IntentType(str, Enum):
     """意图类型枚举。
 
-    对应 Sea 的 IntentType 常量。
     Python 重构只保留 4 种（砍掉 AutoResearch / Custom_Benchmark）。
 
     ⭐ intent_node 用 intent_type == unknown 决定 Command 到 END。
@@ -33,8 +28,6 @@ class IntentContext(BaseModel):
     intent_node 产出，planner_node 消费。
     包含三路并行的结果：classify（intent_type+confidence）+ rewrite（rewritten_intent）
     + extract（entities 里的论文字段）。
-
-    对应 Sea 的 IntentContext struct（intent.go）。
     """
 
     raw_intent: str
@@ -66,7 +59,6 @@ class IntentContext(BaseModel):
 class PaperSearchFields(BaseModel):
     """论文检索字段，用于 GitHub repo 搜索。
 
-    对应 DESIGN.md 1.1 节。
     intent_node 第三路 _extract_paper_fields 用 Structured Outputs 强制 LLM 返回。
     planner 把这些字段填进 Step.inputs，ResearchCodingAgent 用来搜 GitHub。
     """
