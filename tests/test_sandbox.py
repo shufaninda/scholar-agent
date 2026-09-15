@@ -9,7 +9,6 @@ from scholar_agent.agent.sandbox.security import (
     validate_image,
 )
 
-
 # ─── 安全校验 ───
 
 def test_validate_image_rejects_unknown():

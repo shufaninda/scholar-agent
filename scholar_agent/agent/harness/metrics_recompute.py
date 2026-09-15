@@ -60,7 +60,7 @@ def recompute_metrics(predictions_path: str) -> dict:
 
 def _accuracy(y_true: list, y_pred: list) -> float:
     """准确率：预测正确的比例。"""
-    correct = sum(1 for t, p in zip(y_true, y_pred) if t == p)
+    correct = sum(1 for t, p in zip(y_true, y_pred, strict=False) if t == p)
     return correct / len(y_true)
 
 
@@ -71,9 +71,9 @@ def _macro_f1(y_true: list, y_pred: list) -> float:
         return 0.0
     f1s = []
     for label in labels:
-        tp = sum(1 for t, p in zip(y_true, y_pred) if t == label and p == label)
-        fp = sum(1 for t, p in zip(y_true, y_pred) if t != label and p == label)
-        fn = sum(1 for t, p in zip(y_true, y_pred) if t == label and p != label)
+        tp = sum(1 for t, p in zip(y_true, y_pred, strict=False) if t == label and p == label)
+        fp = sum(1 for t, p in zip(y_true, y_pred, strict=False) if t != label and p == label)
+        fn = sum(1 for t, p in zip(y_true, y_pred, strict=False) if t == label and p != label)
         precision = tp / (tp + fp) if (tp + fp) else 0.0
         recall = tp / (tp + fn) if (tp + fn) else 0.0
         f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0
@@ -83,12 +83,12 @@ def _macro_f1(y_true: list, y_pred: list) -> float:
 
 def _mse(y_true: list, y_pred: list) -> float:
     """均方误差。"""
-    return sum((t - p) ** 2 for t, p in zip(y_true, y_pred)) / len(y_true)
+    return sum((t - p) ** 2 for t, p in zip(y_true, y_pred, strict=False)) / len(y_true)
 
 
 def _mae(y_true: list, y_pred: list) -> float:
     """平均绝对误差。"""
-    return sum(abs(t - p) for t, p in zip(y_true, y_pred)) / len(y_true)
+    return sum(abs(t - p) for t, p in zip(y_true, y_pred, strict=False)) / len(y_true)
 
 
 def verify_metrics(

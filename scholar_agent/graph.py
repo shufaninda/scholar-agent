@@ -74,8 +74,8 @@
 """
 
 import logging
-from datetime import datetime, timezone
-from typing import Awaitable, Callable
+from collections.abc import Awaitable, Callable
+from datetime import UTC, datetime
 
 from langgraph.graph import END, StateGraph
 from langgraph.types import Command, interrupt
@@ -316,7 +316,7 @@ def build_graph(
             return False
 
         step.status = StepStatus.in_progress
-        step.started_at = datetime.now(timezone.utc)
+        step.started_at = datetime.now(UTC)
         await _emit(plan.id, PlanEventType.task_started, step)
 
         for attempt in range(1, MAX_STEP_ATTEMPTS + 1):
@@ -344,7 +344,7 @@ def build_graph(
         """成功收尾：产物入账（交接棒递给下游步骤）+ 状态 + 事件。"""
         step.status = StepStatus.completed
         step.error = None
-        step.finished_at = datetime.now(timezone.utc)
+        step.finished_at = datetime.now(UTC)
         step.result = ", ".join(produced.keys())
         plan.artifacts.update(produced)
         await _emit(plan.id, PlanEventType.task_completed, step,

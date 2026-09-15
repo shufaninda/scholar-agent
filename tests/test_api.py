@@ -17,7 +17,6 @@ import fakeredis.aioredis
 import pytest
 from httpx import ASGITransport, AsyncClient
 from langgraph.checkpoint.memory import InMemorySaver
-from tests.conftest import FakeLLM
 
 from scholar_agent.api.app_state import AppState
 from scholar_agent.api.routes import get_state
@@ -25,6 +24,7 @@ from scholar_agent.api.sse import EventBus
 from scholar_agent.graph import build_graph
 from scholar_agent.main import app
 from scholar_agent.models.artifact import Artifact
+from tests.conftest import FakeLLM
 
 
 class StubAgent:

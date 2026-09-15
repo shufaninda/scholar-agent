@@ -11,10 +11,8 @@ ainvoke 传现成 plan（intent_node 的 Command 直进循环）。
 approval 挂起，ainvoke(Command(resume=决定)) 恢复——thread_id 定位。
 """
 
-import pytest
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.types import Command
-from tests.conftest import FakeLLM, make_plan, make_step
 
 from scholar_agent.agent.intent.classifier import IntentClassifier
 from scholar_agent.agent.intent.memory import IntentMemoryStore
@@ -25,6 +23,7 @@ from scholar_agent.models.artifact import Artifact, ArtifactType
 from scholar_agent.models.event import PlanEvent
 from scholar_agent.models.plan import PlanStatus
 from scholar_agent.models.step import StepStatus
+from tests.conftest import FakeLLM, make_plan, make_step
 
 
 def artifact(key: str, value: str = "v") -> Artifact:

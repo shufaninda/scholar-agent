@@ -4,11 +4,10 @@
 git clone），不起真容器不联网。
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pytest
-from tests.conftest import FakeLLM, make_step
 
 from scholar_agent.agent.sandbox.result import SandboxResult
 from scholar_agent.agent.tools.dependency_installer import RepairAction
@@ -17,8 +16,9 @@ from scholar_agent.agent.workers.data import DataAgent
 from scholar_agent.agent.workers.librarian import LibrarianAgent
 from scholar_agent.agent.workers.research_coding import ResearchCodingAgent
 from scholar_agent.models.artifact import Artifact, ArtifactType
+from tests.conftest import FakeLLM, make_step
 
-NOW = datetime.now(timezone.utc).isoformat()
+NOW = datetime.now(UTC).isoformat()
 
 
 def art(key: str, value, type_: ArtifactType = ArtifactType.text) -> Artifact:

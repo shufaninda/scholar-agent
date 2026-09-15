@@ -2,7 +2,6 @@
 
 from types import SimpleNamespace
 
-from tests.conftest import FakeLLM, make_step
 from scholar_agent.agent.planner.planner import build_plan
 from scholar_agent.agent.planner.templates import build_steps_from_template
 from scholar_agent.agent.planner.validator import (
@@ -10,6 +9,7 @@ from scholar_agent.agent.planner.validator import (
     validate_steps,
 )
 from scholar_agent.models.intent import IntentContext, IntentType
+from tests.conftest import FakeLLM, make_step
 
 
 def make_intent(itype=IntentType.paper_reproduction) -> IntentContext:

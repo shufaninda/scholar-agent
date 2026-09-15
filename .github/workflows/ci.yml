@@ -1,0 +1,48 @@
+# 📄 文件用途：GitHub Actions CI —— push/PR 自动跑 106 条测试（全离线套件）
+# 🧠 通俗类比：门禁闸机——每次提交自动把整套测试跑一遍，红了就别想合并。
+#              测试全部离线：FakeLLM / fakeredis / StubAgent / FakeSandbox，
+#              不联网、不花钱、不起真容器——这正是"可回归"的前提。
+#
+# 🗺️ 步骤：checkout → 装 uv（含 Python 3.12）→ uv sync --extra dev → ruff check → pytest
+#
+# 🎯 面试高频：
+#   1. "CI 为什么不配任何密钥就能跑？" → 外部边界（LLM/GitHub/Redis/Docker）
+#      在测试里全部被替身替换，套件天然无副作用。
+#   2. "为什么用 uv？" → uv.lock 锁整棵依赖树，本地/CI 同一份解析结果；
+#      冷启动也比 pip 快一个量级。
+#
+# 🛠️ 动手练习：故意改坏一条断言 push，看 Actions 变红；改回来再 push 看变绿。
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  test:
+    name: pytest (offline suite)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up uv with Python 3.12
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+          enable-cache: true      # uv.lock 哈希命中则跳过重复下载
+
+      - name: Install dependencies (with dev extra)
+        run: uv sync --extra dev
+
+      - name: Lint (ruff)
+        run: uv run ruff check .
+
+      - name: Run tests
+        run: uv run pytest

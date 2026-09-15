@@ -1,8 +1,8 @@
 """测试 tools：GitHub 质量过滤 + 依赖两层恢复。"""
 
+from datetime import UTC
 from types import SimpleNamespace
 
-from tests.conftest import FakeLLM
 from scholar_agent.agent.tools.dependency_installer import (
     PACKAGE_FIXES,
     RepairAction,
@@ -10,13 +10,13 @@ from scholar_agent.agent.tools.dependency_installer import (
     install_dependencies,
 )
 from scholar_agent.agent.tools.github_search import pick_best_repo
-
+from tests.conftest import FakeLLM
 
 # ─── GitHub 质量过滤 ───
 
 def _recent_date() -> str:
-    from datetime import datetime, timezone
-    return str(datetime.now(timezone.utc))
+    from datetime import datetime
+    return str(datetime.now(UTC))
 
 
 def test_pick_best_repo_prefers_qualified():

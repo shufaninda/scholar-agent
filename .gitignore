@@ -29,9 +29,5 @@ htmlcov/
 # ruff
 .ruff_cache/
 
-# 文档类 Markdown 与 IDE 技能：GitHub 仓库只保留代码/数据
-README.md
-APPROVAL_NODE.md
-EXECUTE_STEP.md
-SANDBOX_HARNESS.md
+# IDE 技能目录（不随仓库分发；README 与架构文档已恢复发布——它们是仓库门面）
 .codebuddy/

@@ -86,14 +86,13 @@ class Harness:
 
         for attempt in range(1, max_attempts + 1):
             # 机制2a：检测 LLM 修复后代码是否真的变了（没变就跳过执行）
-            if attempt > 1:
-                if code_sha256(code) == attempts[-1].code_hash:
-                    attempts.append(HarnessAttempt(
-                        attempt=attempt, exit_code=-1,
-                        error="LLM 修复后代码未变化，跳过执行",
-                        repaired=True,
-                    ))
-                    continue
+            if attempt > 1 and code_sha256(code) == attempts[-1].code_hash:
+                attempts.append(HarnessAttempt(
+                    attempt=attempt, exit_code=-1,
+                    error="LLM 修复后代码未变化，跳过执行",
+                    repaired=True,
+                ))
+                continue
 
             # 机制1：补丁静态校验（防 LLM 越权）
             patch_ok, patch_reason = validate_patch(code)

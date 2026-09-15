@@ -149,7 +149,8 @@ class IntentClassifier:
         structured = self.llm.with_structured_output(ClassifyResult)
         result = await structured.ainvoke([
             {"role": "system", "content": CLASSIFY_SYSTEM},
-            {"role": "user", "content": classify_user_prompt(query, json.dumps(memory, ensure_ascii=False))},
+            {"role": "user", "content": classify_user_prompt(
+                query, json.dumps(memory, ensure_ascii=False))},
         ])
         return {
             "intent_type": result.intent_type,
@@ -168,7 +169,8 @@ class IntentClassifier:
 
         resp = await self.llm.ainvoke([
             {"role": "system", "content": REWRITE_SYSTEM},
-            {"role": "user", "content": rewrite_user_prompt(query, json.dumps(memory, ensure_ascii=False))},
+            {"role": "user", "content": rewrite_user_prompt(
+                query, json.dumps(memory, ensure_ascii=False))},
         ])
         return str(resp.content).strip()
 

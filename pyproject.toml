@@ -56,6 +56,15 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "B", "SIM"]
+ignore = [
+    # str+Enum → StrEnum 会改变 str() 语义（需专项迁移 + 回归），暂缓
+    "UP042",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"scholar_agent/api/routes.py" = ["B008"]    # FastAPI Depends() 惯例写法
+"scholar_agent/agent/prompts/*" = ["E501"]  # prompt 长文本行天然超长
+"tests/*" = ["E501"]                        # 测试里的长 URL/参数保持单行可读
 
 [tool.mypy]
 python_version = "3.12"

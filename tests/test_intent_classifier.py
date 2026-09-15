@@ -2,10 +2,10 @@
 
 from types import SimpleNamespace
 
-from tests.conftest import FakeLLM
 from scholar_agent.agent.intent.classifier import IntentClassifier
 from scholar_agent.agent.intent.memory import IntentMemoryStore
 from scholar_agent.models.intent import IntentType, PaperSearchFields
+from tests.conftest import FakeLLM
 
 
 def make_classifier(fake_llm, redis=None) -> IntentClassifier:

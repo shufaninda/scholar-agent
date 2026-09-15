@@ -8,6 +8,7 @@
 """
 
 import logging
+from datetime import UTC
 
 from github import Github
 
@@ -47,15 +48,15 @@ def pick_best_repo(candidates: list[dict], min_stars: int = MIN_STARS) -> str | 
 
     纯函数（不联网），方便单测质量过滤逻辑。
     """
-    from datetime import datetime, timedelta, timezone
+    from datetime import datetime, timedelta
 
-    one_year_ago = datetime.now(timezone.utc) - timedelta(days=365)
+    one_year_ago = datetime.now(UTC) - timedelta(days=365)
     for repo in candidates:
         if repo["stars"] < min_stars:
             continue  # 提前跳过低星 repo
         pushed = datetime.fromisoformat(repo["pushed_at"])
         if pushed.tzinfo is None:
-            pushed = pushed.replace(tzinfo=timezone.utc)
+            pushed = pushed.replace(tzinfo=UTC)
         if pushed < one_year_ago:
             continue  # 弃坑 repo 不要
         return repo["html_url"]

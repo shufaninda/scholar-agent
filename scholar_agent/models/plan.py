@@ -10,7 +10,7 @@
 - artifacts：Agent 间交接产物的全局仓库（数据面）。
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 
 from pydantic import BaseModel, Field
@@ -58,5 +58,5 @@ class Plan(BaseModel):
     artifacts: dict[str, Artifact] = Field(default_factory=dict)
     """⭐ 全局产物仓库（Agent 间消息总线）：完成时写入，执行前读取。"""
 
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
-    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(UTC))

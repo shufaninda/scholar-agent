@@ -6,7 +6,7 @@
     产出 final_report。Plan.artifacts 是全局容器，每个 Agent 完成后写入。
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -53,4 +53,4 @@ class Artifact(BaseModel):
     metadata: dict[str, Any] = Field(default_factory=dict)
     """附加元信息，如 {"model": "deepseek-chat", "tokens": 1234}。"""
 
-    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    created_at: datetime = Field(default_factory=lambda: datetime.now(UTC))

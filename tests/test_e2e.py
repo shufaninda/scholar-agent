@@ -20,20 +20,19 @@
 import asyncio
 import subprocess
 import tempfile
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 import fakeredis.aioredis
 from httpx import ASGITransport, AsyncClient
 from langgraph.checkpoint.memory import InMemorySaver
-from tests.conftest import FakeLLM
 
 from scholar_agent.agent.sandbox.result import SandboxResult
 from scholar_agent.agent.workers.research_coding import ResearchCodingAgent
 from scholar_agent.api.app_state import build_app_state
 from scholar_agent.api.routes import get_state
 from scholar_agent.main import app
-
+from tests.conftest import FakeLLM
 
 # ──────────────────────────────────────────────
 # 外部边界 1+4：Fake 持久化沙箱（本地 subprocess 替代 Docker）
@@ -94,7 +93,7 @@ FAKE_REPO = {
     "full_name": "fake/attention-impl",
     "html_url": "https://github.com/fake/attention-impl",
     "stars": 1200,
-    "pushed_at": datetime.now(timezone.utc).isoformat(),
+    "pushed_at": datetime.now(UTC).isoformat(),
 }
 
 

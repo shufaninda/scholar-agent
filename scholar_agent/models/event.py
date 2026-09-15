@@ -5,7 +5,7 @@
     事件经 event_sink 回调直推 SSE（旁路），不进 AgentState。
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from enum import Enum
 from typing import Any
 
@@ -45,7 +45,7 @@ class PlanEvent(BaseModel):
     task_id: str | None = None
     """关联的 Step ID（sandbox_output / task_* 事件有值）。"""
 
-    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(UTC))
     """事件发生时间。"""
 
     data: dict[str, Any] = Field(default_factory=dict)

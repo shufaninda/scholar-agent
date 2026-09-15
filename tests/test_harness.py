@@ -8,8 +8,6 @@ CircuitBreaker 熔断 / 代码未变化跳过 / 入口文件还原。
 import json
 from pathlib import Path
 
-from tests.conftest import FakeLLM
-
 from scholar_agent.agent.harness.circuit_breaker import CircuitBreaker
 from scholar_agent.agent.harness.feedback_injector import build_feedback_prompt
 from scholar_agent.agent.harness.fingerprint import (
@@ -25,6 +23,7 @@ from scholar_agent.agent.harness.patch_policy import validate_patch
 from scholar_agent.agent.harness.runner import Harness
 from scholar_agent.agent.sandbox.result import SandboxResult
 from scholar_agent.models.harness import HarnessAttempt
+from tests.conftest import FakeLLM
 
 
 class FakeSandbox:
